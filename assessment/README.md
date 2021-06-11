@@ -5,9 +5,9 @@
     helm3 install tech-exam-mysql -f chart/mysql/values.yaml bitnami/mysql
 
 # Web
-[Dockerfile](Dockerfile), also add `.dockerignore`
+[Dockerfile](../Dockerfile), also add `.dockerignore`
 
-[Makefile](Makefile)
+[Makefile](../Makefile)
 
 * Export Okteto API user and token
     ```
@@ -37,10 +37,6 @@ Consist of following components:
 * [app](https://tech-exam-app-thanhh-nguyen.cloud.okteto.net/])
 * [prometheus](https://tech-exam-app-prometheus-thanhh-nguyen.cloud.okteto.net/)
 * [grafana](https://tech-exam-app-grafana-thanhh-nguyen.cloud.okteto.net/)
-
-
-# Grafana admin password
-    Qjzr9L24Wv8zBMZ9
 
 # Feedback
 * Docker image is quite large, not sure if multi-stage builds can help because i don't have much knowledge about Ruby. I did use multi-stage builds for Golang application before.
