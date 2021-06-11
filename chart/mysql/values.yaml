@@ -1,0 +1,12 @@
+# Credentials
+auth:
+  rootPassword: app
+  username: app
+  password: app
+  database: alert
+  forcePassword: true
+
+# Storage
+primary:
+  persistence:
+    size: 4Gi

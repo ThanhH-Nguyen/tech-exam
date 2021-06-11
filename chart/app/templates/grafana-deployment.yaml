@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.fullname" . }}-grafana
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:7.5.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /robots.txt
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 1            
+          volumeMounts:
+            - name: grafana-config
+              mountPath: /etc/grafana
+          env:
+            - name: GF_DATABASE_HOST
+              value: tech-exam-mysql
+            - name: GF_DATABASE_NAME
+              value: alert
+            - name: GF_DATABASE_PASSWORD
+              value: app
+            - name: GF_DATABASE_USER
+              value: app
+      volumes:
+        - name: grafana-config
+          configMap:
+            name: {{ include "app.fullname" . }}-grafana

@@ -1,0 +1,5 @@
+mysql:
+  user: app
+  pass: app
+  host: tech-exam-mysql
+  port: 3306

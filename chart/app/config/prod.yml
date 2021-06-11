@@ -1,0 +1,8 @@
+configMap:
+  RACK_ENV: production
+  DB_HOST: tech-exam-mysql
+  DB_USERNAME: app
+  DB_NAME: alert
+
+secret:
+  DB_PASSWORD: app
