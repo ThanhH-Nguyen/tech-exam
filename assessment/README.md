@@ -36,7 +36,7 @@ Consist of following components:
 # URLs
 * [app](https://tech-exam-app-thanhh-nguyen.cloud.okteto.net/])
 * [prometheus](https://tech-exam-app-prometheus-thanhh-nguyen.cloud.okteto.net/)
-* [grafana](https://tech-exam-app-grafana-thanhh-nguyen.cloud.okteto.net/)
+* [grafana](https://tech-exam-app-grafana-thanhh-nguyen.cloud.okteto.net/d/MQWgroiiz/mysql-overview?orgId=1&refresh=1m)
 
 # Feedback
 * Docker image is quite large, not sure if multi-stage builds can help because i don't have much knowledge about Ruby. I did use multi-stage builds for Golang application before.
