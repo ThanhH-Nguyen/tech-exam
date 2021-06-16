@@ -34,7 +34,7 @@ Consist of following components:
 * grafana: is deployed as part of `app` helm chart.
 
 # URLs
-* [app](https://tech-exam-app-thanhh-nguyen.cloud.okteto.net/])
+* [app](https://tech-exam-app-thanhh-nguyen.cloud.okteto.net/)
 * [prometheus](https://tech-exam-app-prometheus-thanhh-nguyen.cloud.okteto.net/)
 * [grafana](https://tech-exam-app-grafana-thanhh-nguyen.cloud.okteto.net/d/MQWgroiiz/mysql-overview?orgId=1&refresh=1m)
 

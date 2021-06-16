@@ -38,7 +38,9 @@ spec:
             successThreshold: 1
             tcpSocket:
               port: 3000
-            timeoutSeconds: 1            
+            timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.resources.grafana | nindent 12 }}
           volumeMounts:
             - name: grafana-config
               mountPath: /etc/grafana

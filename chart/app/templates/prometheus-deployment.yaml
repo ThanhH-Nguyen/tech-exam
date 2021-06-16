@@ -22,6 +22,28 @@ spec:
             - "--storage.tsdb.path=/prometheus/"
           ports:
             - containerPort: 9090
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /-/healthy
+              port: 9090
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /-/ready
+              port: 9090
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            {{- toYaml .Values.resources.prometheus | nindent 12 }}
           volumeMounts:
             - name: prometheus-config-volume
               mountPath: /etc/prometheus/

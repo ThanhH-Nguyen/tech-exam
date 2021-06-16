@@ -1,0 +1,56 @@
+- hosts: localhost
+  vars:
+    appname: tech-exam
+  tasks:
+  - name: add bitnami helm repo
+    command:
+      argv:
+        - /usr/local/bin/helm3
+        - repo
+        - add
+        - bitnami
+        - 'https://charts.bitnami.com/bitnami'
+  - name: add prometheus-community helm repo
+    command:
+      argv:
+        - /usr/local/bin/helm3
+        - repo
+        - add
+        - prometheus-community
+        - 'https://prometheus-community.github.io/helm-charts'
+  - name: deploy mysql
+    command:
+      argv:
+        - /usr/local/bin/helm3
+        - upgrade
+        - '{{ appname }}-mysql'
+        - --install
+        - --atomic
+        - -f
+        - chart/mysql/values.yaml
+        - bitnami/mysql
+  - name: deploy mysql exporter
+    command:
+      argv:
+        - /usr/local/bin/helm3
+        - upgrade
+        - '{{ appname }}-prom-mysql-exporter'
+        - --install
+        - --atomic
+        - -f
+        - chart/prometheus-mysql-exporter/values.yaml
+        - prometheus-community/prometheus-mysql-exporter
+  - name: deploy app
+    command:
+      argv:
+        - /usr/local/bin/helm3
+        - upgrade
+        - '{{ appname }}-app'
+        - '{{ chart }}'
+        - --debug
+        - --install
+        - --atomic
+        - --set
+        - 'image.tag={{ tag }}'
+        - --values
+        - '{{ config }}'
